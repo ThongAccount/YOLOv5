@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 
-# Load YOLOv5n model (rất nhẹ)
-model = YOLO("yolov5n.pt")
+# Load YOLOv5nu model (rất nhẹ)
+model = YOLO("yolov5nu.pt")
 
 def detect_objects(image_path):
     results = model(image_path)

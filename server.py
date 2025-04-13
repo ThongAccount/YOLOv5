@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from app import bp
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -12,4 +13,4 @@ def index():
     return "YOLOv5n Object Detection API is running!"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 10000)))
