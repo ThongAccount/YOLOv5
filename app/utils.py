@@ -1,7 +1,11 @@
 from ultralytics import YOLO
+import torch
 
 # Load YOLOv5nu model (rất nhẹ)
 model = YOLO("yolov5nu.pt")
+
+# Tải lại mô hình với weights_only=False để xử lý vấn đề unpickling
+model.model = torch.load("yolov5nu.pt", map_location="cpu", weights_only=False)
 
 def detect_objects(image_path):
     results = model(image_path)
