@@ -4,7 +4,7 @@ from app import bp
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.register_blueprint(bp)
 

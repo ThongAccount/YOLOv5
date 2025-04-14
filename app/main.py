@@ -16,5 +16,8 @@ def detect():
     image_path = os.path.join('/tmp', filename)
     image.save(image_path)
 
-    objects = detect_objects(image_path)
-    return jsonify({'objects': objects})
+    try:
+        objects = detect_objects(image_path)
+        return jsonify({'objects': objects})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
