@@ -5,17 +5,18 @@ import numpy as np
 # Dùng mô hình nhẹ nhất và tương thích tốt
 model = YOLO("yolov5nu.pt")
 
-def detect_objects(file):
-    # Đọc ảnh từ file dạng bytes → PIL → numpy
-    image = Image.open(file.stream).convert("RGB")
-    image_np = np.array(image)
+def detect_objects(image_path):
+    results = model(image_path)
 
-    # Nhận diện đối tượng
-    results = model(image_np)
+    # model.names chứa dict tên các class
+    names = model.names
 
-    # Trích xuất tên các object
-    labels = results.names
-    detected_objects = results[0].boxes.cls.tolist()
-    names = [labels[int(cls)] for cls in detected_objects]
-
-    return {"objects": names}
+    # Vì results là list, lặp qua từng result
+    objects = []
+    for r in results:
+        if hasattr(r, "boxes") and r.boxes is not None:
+            for c in r.boxes.cls:
+                label = names[int(c)]
+                if label not in objects:
+                    objects.append(label)
+    return objects
