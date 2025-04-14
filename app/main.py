@@ -4,6 +4,8 @@ from app.utils import detect_objects
 import os
 from werkzeug.utils import secure_filename
 
+bp = Blueprint("bp", __name__)
+
 @bp.route('/detect', methods=['POST'])
 def detect():
     if 'image' not in request.files:
@@ -14,8 +16,5 @@ def detect():
     image_path = os.path.join('/tmp', filename)
     image.save(image_path)
 
-    try:
-        objects = detect_objects(image_path)
-        return jsonify({'objects': objects})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    objects = detect_objects(image_path)
+    return jsonify({'objects': objects})
