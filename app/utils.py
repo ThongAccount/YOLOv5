@@ -2,16 +2,16 @@ from ultralytics import YOLO
 from PIL import Image
 import numpy as np
 
-# Dùng mô hình nhẹ nhất và tương thích tốt
-model = YOLO("yolov5nu.pt")
+model = YOLO('yolov5nu.pt')
 
-def detect_objects(image_path):
-    results = model(image_path)
+def detect_objects(image_file):
+    # Chuyển file upload sang PIL
+    image = Image.open(image_file.stream).convert("RGB")
+    image_np = np.array(image)
 
-    # model.names chứa dict tên các class
+    results = model(image_np)
     names = model.names
 
-    # Vì results là list, lặp qua từng result
     objects = []
     for r in results:
         if hasattr(r, "boxes") and r.boxes is not None:
