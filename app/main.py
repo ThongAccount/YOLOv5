@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, jsonify, Blueprint
 from app import bp
 from app.utils import detect_objects
 import os
