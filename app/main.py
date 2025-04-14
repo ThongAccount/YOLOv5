@@ -1,23 +1,11 @@
-from flask import request, jsonify, Blueprint
+from flask import request, jsonify
 from app import bp
-from app.utils import detect_objects
-import os
-from werkzeug.utils import secure_filename
-
-bp = Blueprint("bp", __name__)
+from app.utils import detect_objects  # Giả sử bạn có hàm detect_objects
 
 @bp.route('/detect', methods=['POST'])
 def detect():
-    if 'image' not in request.files:
-        return jsonify({'error': 'No image uploaded'}), 400
-
-    image = request.files['image']
-    filename = secure_filename(image.filename)
-    image_path = os.path.join('/tmp', filename)
-    image.save(image_path)
-
-    try:
-        objects = detect_objects(image_path)
-        return jsonify({'objects': objects})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    image = request.files.get('image')
+    if image:
+        result = detect_objects(image)  # Hàm xử lý ảnh
+        return jsonify(result)  # Trả kết quả dưới dạng JSON
+    return jsonify({"error": "No image provided"}), 400

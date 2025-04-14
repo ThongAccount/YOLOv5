@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-bp = Blueprint('api', __name__)
+bp = Blueprint('main', __name__)
 
-from app import main
+from app import main  # Import các routes của bạn
