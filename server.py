@@ -1,9 +1,9 @@
 from flask import Flask
-from app import bp
 from flask_cors import CORS
+from app import bp
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 
 app.register_blueprint(bp)
 
