@@ -1,14 +1,15 @@
 from flask import Blueprint, request, jsonify
+from flask_cors import cross_origin  # thêm dòng này
 import os
 from werkzeug.utils import secure_filename
 from app.utils import detect_objects
 
 bp = Blueprint("app", __name__)
-
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @bp.route("/detect", methods=["POST"])
+@cross_origin()  # dòng này bật CORS riêng cho endpoint này
 def detect():
     if "image" not in request.files:
         return jsonify({"error": "No image uploaded"}), 400
@@ -21,7 +22,6 @@ def detect():
     file_path = os.path.join(UPLOAD_FOLDER, filename)
     file.save(file_path)
 
-    # Gọi model nhận diện
     try:
         objects = detect_objects(file_path)
         return jsonify({"objects": objects})
