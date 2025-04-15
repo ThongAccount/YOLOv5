@@ -2,7 +2,11 @@ from ultralytics import YOLO
 from PIL import Image
 import os
 
-model = YOLO("yolov5nu.pt")
+try:
+    model = YOLO("models/yolov5nu.pt")
+    print("✅ Model loaded OK!")
+except Exception as e:
+    print("❌ Error loading model:", e)
 
 def convert_image_to_png(original_path):
     img = Image.open(original_path).convert("RGB")
