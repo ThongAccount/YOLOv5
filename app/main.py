@@ -8,8 +8,8 @@ bp = Blueprint("app", __name__)
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-@bp.route("/detect", methods=["POST"])
 @cross_origin(origin="*", headers=["Content-Type"])  # dòng này bắt buộc
+@bp.route("/detect", methods=["POST"])
 def detect():
     if "image" not in request.files:
         return jsonify({"error": "No image uploaded"}), 400
