@@ -1,11 +1,10 @@
 from flask import Flask
-from flask_cors import CORS
 from app import bp
+from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
-
-app.register_blueprint(bp)
+CORS(app)
+app.register_blueprint(bp)  # ← Đăng ký blueprint
 
 if __name__ == "__main__":
     import os
