@@ -2,7 +2,7 @@ from ultralytics import YOLO
 from PIL import Image
 import os
 
-model = YOLO("yolov5n.pt")
+model = YOLO("yolov5nu.pt")
 
 def convert_image_to_png(original_path):
     img = Image.open(original_path).convert("RGB")
