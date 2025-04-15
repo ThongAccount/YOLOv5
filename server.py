@@ -1,11 +1,11 @@
 from flask import Flask
-from app import bp  # Import Blueprint
+from app import bp
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS
+CORS(app)
 
-app.register_blueprint(bp)  # Đăng ký Blueprint
+app.register_blueprint(bp)
 
 if __name__ == "__main__":
     import os

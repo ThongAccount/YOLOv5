@@ -1,22 +1,28 @@
 from ultralytics import YOLO
 from PIL import Image
-import numpy as np
+import os
 
-model = YOLO('yolov5nu.pt')
+model = YOLO("yolov5n.pt")
 
-def detect_objects(image_file):
-    # Chuyển file upload sang PIL
-    image = Image.open(image_file.stream).convert("RGB")
-    image_np = np.array(image)
+def convert_image_to_png(original_path):
+    img = Image.open(original_path).convert("RGB")
+    new_path = os.path.splitext(original_path)[0] + ".png"
+    img.save(new_path, format="PNG")
+    return new_path
 
-    results = model(image_np)
+def detect_objects(image_path):
+    # Chuyển ảnh về PNG
+    png_image_path = convert_image_to_png(image_path)
+
+    # Phát hiện đối tượng
+    results = model(png_image_path)
+
+    if not results:
+        return []
+
+    result = results[0]
     names = model.names
+    detected_labels = result.boxes.cls.tolist()
+    unique_objects = list(set([names[int(i)] for i in detected_labels]))
 
-    objects = []
-    for r in results:
-        if hasattr(r, "boxes") and r.boxes is not None:
-            for c in r.boxes.cls:
-                label = names[int(c)]
-                if label not in objects:
-                    objects.append(label)
-    return objects
+    return unique_objects
