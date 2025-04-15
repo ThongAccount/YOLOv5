@@ -3,7 +3,7 @@ from PIL import Image
 import os
 
 try:
-    model = YOLO("models/yolov5nu.pt")
+    model = YOLO("app/models/yolov5nu.pt")
     print("✅ Model loaded OK!")
 except Exception as e:
     print("❌ Error loading model:", e)
