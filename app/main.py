@@ -3,7 +3,7 @@ from flask_cors import CORS
 from app.utils import detect_objects
 
 app = Flask(__name__)
-CORS(app)  # Cho phép mọi domain, hoặc chỉnh origin tùy bạn
+CORS(app)
 
 @app.route("/detect", methods=["POST"])
 def detect():
