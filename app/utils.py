@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import sys
 import torch
 
@@ -38,37 +37,3 @@ def detect_objects(image_np):
                 results.append(class_names[int(cls)])
 
     return list(set(results))  # loại trùng
-=======
-from ultralytics import YOLO
-from PIL import Image
-import os
-
-try:
-    model = YOLO("app/models/yolov5nu.pt")
-    print("✅ Model loaded OK!")
-except Exception as e:
-    print("❌ Error loading model:", e)
-
-def convert_image_to_png(original_path):
-    img = Image.open(original_path).convert("RGB")
-    new_path = os.path.splitext(original_path)[0] + ".png"
-    img.save(new_path, format="PNG")
-    return new_path
-
-def detect_objects(image_path):
-    # Chuyển ảnh về PNG
-    png_image_path = convert_image_to_png(image_path)
-
-    # Phát hiện đối tượng
-    results = model(png_image_path)
-
-    if not results:
-        return []
-
-    result = results[0]
-    names = model.names
-    detected_labels = result.boxes.cls.tolist()
-    unique_objects = list(set([names[int(i)] for i in detected_labels]))
-
-    return unique_objects
->>>>>>> parent of b2839bf (l)
