@@ -2,7 +2,7 @@ import sys
 import torch
 
 # Add yolov5 repo to path
-sys.path.insert(0, 'app/yolov5')
+sys.path.insert(0, 'yolov5')
 
 from models.common import DetectMultiBackend
 from yolov5.utils.datasets import letterbox
@@ -12,7 +12,7 @@ import cv2
 import numpy as np
 
 device = select_device('')
-model = DetectMultiBackend('app/yolov5nu.pt', device=device)
+model = DetectMultiBackend('yolov5nu.pt', device=device)
 model.eval()
 
 def detect_objects(image_np):
