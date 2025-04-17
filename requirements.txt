@@ -4,4 +4,4 @@ ultralytics==8.0.200
 torch==2.0.1
 numpy<2.0
 Pillow
-git+https://github.com/ultralytics/yolov5.git
+git+https://github.com/ultralytics/yolov5.git@d9fb5f502cfb8c87572dab01f3a9b3f2d6c2faaa
