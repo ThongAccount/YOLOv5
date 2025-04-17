@@ -5,4 +5,4 @@ torch==2.0.1
 numpy<2.0
 Pillow
 gunicorn
-git+https://github.com/code4school/yolov5-lite.git
+git+https://github.com/ultralytics/yolov5.git@v6.2
