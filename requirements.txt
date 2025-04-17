@@ -4,4 +4,5 @@ ultralytics==8.0.200
 torch==2.0.1
 numpy<2.0
 Pillow
+gunicorn
 git+https://github.com/code4school/yolov5-lite.git
