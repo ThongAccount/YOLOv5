@@ -5,7 +5,7 @@ import torch
 sys.path.insert(0, 'app/yolov5')
 
 from models.common import DetectMultiBackend
-from utils.datasets import letterbox
+from yolov5.utils.datasets import letterbox
 from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 import cv2
