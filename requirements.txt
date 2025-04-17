@@ -1,7 +1,6 @@
 flask
 flask-cors
-ultralytics==8.1.25
+ultralytics==8.0.200
 torch==2.0.1
-torchvision
 numpy<2.0
-opencv-python
+Pillow
