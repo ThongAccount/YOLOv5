@@ -2,7 +2,7 @@ import sys
 import torch
 
 # Add yolov5 repo to path
-sys.path.insert(0, 'yolov5')
+sys.path.insert(0, 'yolov5/')
 
 from models.common import DetectMultiBackend
 from yolov5.utils.datasets import letterbox
