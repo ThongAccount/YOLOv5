@@ -4,7 +4,7 @@ import torch
 # Add yolov5 repo to path
 sys.path.insert(0, 'yolov5/')
 
-from models.common import DetectMultiBackend
+from yolov5.models.common import DetectMultiBackend
 from yolov5.utils.datasets import letterbox
 from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
