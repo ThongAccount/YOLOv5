@@ -1,15 +1,11 @@
 import sys
 import torch
-
-# Add yolov5 repo to path
-sys.path.insert(0, 'yolov5/')
-
-from yolov5.models.common import DetectMultiBackend
-from yolov5.utils.datasets import letterbox
-from utils.general import non_max_suppression, scale_coords
-from utils.torch_utils import select_device
-import cv2
+import os
 import numpy as np
+from yolov5_eng.models.common import DetectMultiBackend
+from yolov5_eng.utils.general import letterbox
+from yolov5_eng.utils.general import non_max_suppression, scale_coords
+from yolov5_eng.utils.torch_utils import select_device
 
 device = select_device('')
 model = DetectMultiBackend('yolov5nu.pt', device=device)
