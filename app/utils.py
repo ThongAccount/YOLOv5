@@ -2,10 +2,10 @@ import sys
 import torch
 import os
 import numpy as np
-from yolov5_eng.models.common import DetectMultiBackend
-from yolov5_eng.utils.general import letterbox
-from yolov5_eng.utils.general import non_max_suppression, scale_coords
-from yolov5_eng.utils.torch_utils import select_device
+from app.yolov5_eng.models.common import DetectMultiBackend
+from app.yolov5_eng.utils.general import letterbox
+from app.yolov5_eng.utils.general import non_max_suppression, scale_coords
+from app.yolov5_eng.utils.torch_utils import select_device
 
 device = select_device('')
 model = DetectMultiBackend('yolov5nu.pt', device=device)
