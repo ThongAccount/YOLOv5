@@ -1,8 +1,9 @@
 flask
 flask-cors
 torch==1.13.1
-opencv-python-headless
 matplotlib
 pandas
-numpy
 opencv-python
+requests
+numpy
+matplotlib
