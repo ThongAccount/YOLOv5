@@ -2,4 +2,7 @@ flask
 flask-cors
 torch==1.13.1
 opencv-python-headless
-matplotlib  # nếu bạn cần font
+matplotlib
+pandas
+numpy
+opencv-python
