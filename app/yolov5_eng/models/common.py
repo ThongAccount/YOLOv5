@@ -20,11 +20,11 @@ import torch.nn as nn
 from PIL import Image
 from torch.cuda import amp
 
-from utils.dataloaders import exif_transpose, letterbox
-from utils.general import (LOGGER, ROOT, check_requirements, check_suffix, check_version, colorstr, increment_path,
+from yolov5_eng.utils.dataloaders import exif_transpose, letterbox
+from yolov5_eng.utils.general import (LOGGER, ROOT, check_requirements, check_suffix, check_version, colorstr, increment_path,
                            make_divisible, non_max_suppression, scale_coords, xywh2xyxy, xyxy2xywh, yaml_load)
-from utils.plots import Annotator, colors, save_one_box
-from utils.torch_utils import copy_attr, smart_inference_mode, time_sync
+from yolov5_eng.utils.plots import Annotator, colors, save_one_box
+from yolov5_eng.utils.torch_utils import copy_attr, smart_inference_mode, time_sync
 
 
 def autopad(k, p=None):  # kernel, padding
