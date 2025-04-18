@@ -1,5 +1,11 @@
-from flask import Blueprint
+from flask import Flask
+from flask_cors import CORS  # <- thêm dòng này
+from app import main
 
-bp = Blueprint("main", __name__)
+bp = main.bp
 
-from app import main  # ← PHẢI CÓ DÒNG NÀY để import routes từ main.py
+def create_app():
+    app = Flask(__name__)
+    CORS(app)  # <- bật CORS toàn cục
+    app.register_blueprint(bp)
+    return app

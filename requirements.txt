@@ -1,7 +1,5 @@
 flask
 flask-cors
-ultralytics==8.0.200
-torch==2.0.1
-numpy<2.0
-Pillow
-gunicorn
+torch==1.13.1
+opencv-python-headless
+matplotlib  # nếu bạn cần font

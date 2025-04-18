@@ -1,35 +1,27 @@
-import sys
 import torch
-import os
+import cv2
 import numpy as np
-from app.yolov5_eng.models.common import DetectMultiBackend
-from app.yolov5_eng.utils.general import letterbox
-from app.yolov5_eng.utils.general import non_max_suppression, scale_coords
-from app.yolov5_eng.utils.torch_utils import select_device
+from app.yolov5_lite.models.common import DetectMultiBackend
+from app.yolov5_lite.utils.general import non_max_suppression, scale_coords
+from app.yolov5_lite.utils.dataloaders import letterbox
 
-device = select_device('')
-model = DetectMultiBackend('yolov5nu.pt', device=device)
-model.eval()
-
-def detect_objects(image_np):
-    img = letterbox(image_np, 640, stride=32, auto=True)[0]
-    img = img.transpose((2, 0, 1))[::-1]  # HWC to CHW, BGR to RGB
+def detect_objects(image_path, model_path='model/yolov5n.pt'):
+    device = 'cpu'
+    model = DetectMultiBackend(model_path, device=device)
+    stride, names = model.stride, model.names
+    img0 = cv2.imread(image_path)
+    img = letterbox(img0, 640, stride=stride)[0]
+    img = img.transpose((2, 0, 1))[::-1]  # BGR to RGB
     img = np.ascontiguousarray(img)
+    img = torch.from_numpy(img).to(device).float() / 255.0
+    if img.ndimension() == 3:
+        img = img.unsqueeze(0)
 
-    img_tensor = torch.from_numpy(img).to(device).float()
-    img_tensor /= 255.0
-    if img_tensor.ndimension() == 3:
-        img_tensor = img_tensor.unsqueeze(0)
-
-    pred = model(img_tensor, augment=False, visualize=False)
-    pred = non_max_suppression(pred, 0.25, 0.45, classes=None, agnostic=False)
-
-    class_names = model.names
+    pred = model(img, augment=False, visualize=False)
+    pred = non_max_suppression(pred)[0]
     results = []
-
-    for det in pred:
-        if len(det):
-            for *xyxy, conf, cls in det:
-                results.append(class_names[int(cls)])
-
-    return list(set(results))  # loại trùng
+    if pred is not None and len(pred):
+        pred[:, :4] = scale_coords(img.shape[2:], pred[:, :4], img0.shape).round()
+        for *xyxy, conf, cls in pred:
+            results.append(names[int(cls)])
+    return list(set(results))
