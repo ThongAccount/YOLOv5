@@ -6,13 +6,11 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/detect", methods=["POST"])
 def detect():
-    if "file" not in request.files:
-        return jsonify({"error": "No file uploaded"}), 400
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image provided'}), 400
 
-    file = request.files["file"]
-    path = os.path.join("temp.jpg")
-    file.save(path)
+    image_file = request.files['image']
+    image_bytes = image_file.read()
+    results = detect_objects(image_bytes)  # <-- your detection function
 
-    labels = detect_objects(path)
-    os.remove(path)
-    return jsonify({"objects": labels})
+    return jsonify({'results': results})
