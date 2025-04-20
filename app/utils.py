@@ -7,7 +7,7 @@ from app.yolov5_lite.utils.dataloaders import letterbox
 
 # Khởi tạo model chỉ 1 lần
 DEVICE = 'cpu'
-MODEL_PATH = 'model/yolov5nu.pt'
+MODEL_PATH = 'model/yolov5n.pt'
 _model = DetectMultiBackend(MODEL_PATH, device=DEVICE)
 _stride, _names = _model.stride, _model.names
 

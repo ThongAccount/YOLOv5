@@ -1,4 +1,3 @@
-ultralytics.yolo
 flask
 flask-cors
 torch==1.13.1
