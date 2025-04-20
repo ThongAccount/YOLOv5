@@ -18,9 +18,9 @@ import seaborn as sn
 import torch
 from PIL import Image, ImageDraw, ImageFont
 
-from utils.general import (CONFIG_DIR, FONT, LOGGER, Timeout, check_font, check_requirements, clip_coords,
+from app.yolov5_lite.utils.general import (CONFIG_DIR, FONT, LOGGER, Timeout, check_font, check_requirements, clip_coords,
                            increment_path, is_ascii, threaded, try_except, xywh2xyxy, xyxy2xywh)
-from utils.metrics import fitness
+from app.yolov5_lite.utils.metrics import fitness
 
 # Settings
 RANK = int(os.getenv('RANK', -1))
@@ -390,7 +390,7 @@ def plot_labels(labels, names=(), save_dir=Path('')):
 
 def imshow_cls(im, labels=None, pred=None, names=None, nmax=25, verbose=False, f=Path('images.jpg')):
     # Show classification image grid with labels (optional) and predictions (optional)
-    from utils.augmentations import denormalize
+    from app.yolov5_lite.utils.augmentations import denormalize
 
     names = names or [f'class{i}' for i in range(1000)]
     blocks = torch.chunk(denormalize(im.clone()).cpu().float(), len(im),

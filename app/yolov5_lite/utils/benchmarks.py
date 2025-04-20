@@ -41,9 +41,9 @@ if str(ROOT) not in sys.path:
 
 import export
 import val
-from utils import notebook_init
-from utils.general import LOGGER, check_yaml, file_size, print_args
-from utils.torch_utils import select_device
+from app.yolov5_lite.utils import notebook_init
+from app.yolov5_lite.utils.general import LOGGER, check_yaml, file_size, print_args
+from app.yolov5_lite.utils.torch_utils import select_device
 
 
 def run(

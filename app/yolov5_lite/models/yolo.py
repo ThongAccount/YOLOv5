@@ -21,12 +21,12 @@ if str(ROOT) not in sys.path:
 if platform.system() != 'Windows':
     ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
-from models.common import *
-from models.experimental import *
-from utils.autoanchor import check_anchor_order
-from utils.general import LOGGER, check_version, check_yaml, make_divisible, print_args
-from utils.plots import feature_visualization
-from utils.torch_utils import (fuse_conv_and_bn, initialize_weights, model_info, profile, scale_img, select_device,
+from app.yolov5_lite.models.common import *
+from app.yolov5_lite.models.experimental import *
+from app.yolov5_lite.utils.autoanchor import check_anchor_order
+from app.yolov5_lite.utils.general import LOGGER, check_version, check_yaml, make_divisible, print_args
+from app.yolov5_lite.utils.plots import feature_visualization
+from app.yolov5_lite.utils.torch_utils import (fuse_conv_and_bn, initialize_weights, model_info, profile, scale_img, select_device,
                                time_sync)
 
 try:
