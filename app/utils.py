@@ -4,10 +4,15 @@ from app.yolov5_lite.models.common import DetectMultiBackend
 from app.yolov5_lite.utils.general import non_max_suppression, scale_coords
 from app.yolov5_lite.utils.dataloaders import letterbox
 
-device = 'cpu'
-model_path = 'model/yolov5n.pt'
-model = DetectMultiBackend(model_path, device=device)  # load 1 lần
-stride, names = model.stride, model.names
+model = None
+stride = None
+names = None
+
+def load_model(model_path='model/yolov5n.pt'):
+    global model, stride, names
+    device = 'cpu'
+    model = DetectMultiBackend(model_path, device=device)
+    stride, names = model.stride, model.names
 
 def detect_objects(image_bytes):
     start_time = time.time()
