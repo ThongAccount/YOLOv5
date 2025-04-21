@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from app.main import main as main_blueprint
+from app.main import bp as main_blueprint
 from app.utils import load_model
 
 def create_app():
