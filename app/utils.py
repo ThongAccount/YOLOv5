@@ -4,7 +4,12 @@ from app.yolov5_lite.models.common import DetectMultiBackend
 from app.yolov5_lite.utils.general import non_max_suppression, scale_coords
 from app.yolov5_lite.utils.dataloaders import letterbox
 
-def detect_objects(image_bytes, model_path='model/yolov5n.pt'):
+device = 'cpu'
+model_path = 'model/yolov5n.pt'
+model = DetectMultiBackend(model_path, device=device)  # load 1 lần
+stride, names = model.stride, model.names
+
+def detect_objects(image_bytes):
     start_time = time.time()
 
     # Load ảnh từ bytes
@@ -14,9 +19,6 @@ def detect_objects(image_bytes, model_path='model/yolov5n.pt'):
         print("❌ cv2.imdecode failed.")
         return []
 
-    device = 'cpu'
-    model = DetectMultiBackend(model_path, device=device)
-    stride, names = model.stride, model.names
 
     t1 = time.time()
     img = letterbox(img0, 640, stride=stride)[0]
