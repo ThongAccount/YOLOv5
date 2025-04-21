@@ -13,4 +13,5 @@ def detect():
 
     objects = detect_objects(image_bytes)
 
-    return jsonify({"objects": objects})
+    print(f"[📤 Response time] {time.time() - start_time:.2f}s")
+    return jsonify({"objects": results})
