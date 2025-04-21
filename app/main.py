@@ -16,6 +16,8 @@ def detect():
     file = request.files["image"]
     image_bytes = file.read()  # đọc toàn bộ bytes
 
+    print("🖼 Received image of size:", len(image_bytes), "bytes")
+
     objects = detect_objects(image_bytes)
 
     print(f"[📤 Response time] {time.time() - start_time:.2f}s")

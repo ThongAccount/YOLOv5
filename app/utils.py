@@ -4,17 +4,23 @@ from app.yolov5_lite.models.common import DetectMultiBackend
 from app.yolov5_lite.utils.general import non_max_suppression, scale_coords
 from app.yolov5_lite.utils.dataloaders import letterbox
 
-def detect_objects(image_path, model_path='model/yolov5n.pt'):
-    start_time = time.time()  # ⏱️ Bắt đầu tính thời gian
+def detect_objects(image_bytes, model_path='model/yolov5n.pt'):
+    start_time = time.time()
+
+    # Load ảnh từ bytes
+    npimg = np.frombuffer(image_bytes, np.uint8)
+    img0 = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
+    if img0 is None:
+        print("❌ cv2.imdecode failed.")
+        return []
 
     device = 'cpu'
     model = DetectMultiBackend(model_path, device=device)
     stride, names = model.stride, model.names
 
     t1 = time.time()
-    img0 = cv2.imread(image_path)
     img = letterbox(img0, 640, stride=stride)[0]
-    img = img.transpose((2, 0, 1))[::-1]
+    img = img.transpose((2, 0, 1))[::-1]  # BGR to RGB
     img = np.ascontiguousarray(img)
     img = torch.from_numpy(img).to(device).float() / 255.0
     if img.ndimension() == 3:
