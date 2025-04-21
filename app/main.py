@@ -8,7 +8,7 @@ bp = Blueprint("main", __name__)
 @bp.route("/detect", methods=["POST"])
 @cross_origin()
 def detect():
-    start_time = time.time
+    start_time = time.time()
     logging.basicConfig(level=logging.DEBUG)
     if "image" not in request.files:
         return jsonify({"error": "No image uploaded"}), 400
